@@ -41,8 +41,8 @@ def get_token_ids(dataset, vocab):
 
 def load_vocab(data_dir: Union[str, Path]):
     vocab_tsv = Path(data_dir) / "vocab.tsv"
+    vocab_stoi = {}
     if vocab_tsv.exists():
-        vocab_stoi = {}
         vocab_freq = {}
         with vocab_tsv.open() as vocab_file:
             next(vocab_file)  # skips header line

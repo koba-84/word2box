@@ -83,40 +83,29 @@ def training(config):
 
     # Instance of trainer
     if config["model_type"] == "Word2Box" or config["model_type"] == "Word2Vec":
-        trainer = TrainerWordSimilarity(
-            train_iter=train_iter,
-            val_iter=val_iter,
-            vocab=TEXT,
-            lr=config["lr"],
-            n_gram=config["n_gram"],
-            loss_fn=config["loss_fn"],
-            negative_samples=config["negative_samples"],
-            model_mode="SkipGram",
-            log_frequency=config["log_frequency"],
-            margin=config["margin"],
-            similarity_datasets_dir=config["eval_file"],
-            subsampling_prob=None,  # pass: subsampling_prob, when you want to adjust neg_sampling distn
-        )
+        model_mode = "SkipGram"
     elif (
         config["model_type"] == "Word2BoxPooled"
         or config["model_type"] == "Word2VecPooled"
         or config["model_type"] == "Word2BoxConjunction"
         or config["model_type"] == "Word2Gauss"
     ):
-        trainer = TrainerWordSimilarity(
-            train_iter=train_iter,
-            val_iter=val_iter,
-            vocab=TEXT,
-            lr=config["lr"],
-            n_gram=config["n_gram"],
-            loss_fn=config["loss_fn"],
-            negative_samples=config["negative_samples"],
-            model_mode="CBOW",
-            log_frequency=config["log_frequency"],
-            margin=config["margin"],
-            similarity_datasets_dir=config["eval_file"],
-            subsampling_prob=None,  # pass: subsampling_prob, when you want to adjust neg_sampling distn
-        )
+        model_mode = "CBOW"
+    
+    trainer = TrainerWordSimilarity(
+        train_iter=train_iter,
+        val_iter=val_iter,
+        vocab=TEXT,
+        lr=config["lr"],
+        n_gram=config["n_gram"],
+        loss_fn=config["loss_fn"],
+        negative_samples=config["negative_samples"],
+        model_mode=model_mode,
+        log_frequency=config["log_frequency"],
+        margin=config["margin"],
+        similarity_datasets_dir=config["eval_file"],
+        subsampling_prob=None,  # pass: subsampling_prob, when you want to adjust neg_sampling distn
+    )
 
     trainer.train_model(
         model=model,
