@@ -10,7 +10,9 @@ device = torch.cuda.current_device() if use_cuda else "cpu"
 
 def nll(pos, neg, **kwagrs):
     """
-	The loss funtion is used for box embeddings
+	The Negative Log Likelihood loss funtion is used for
+    box embeddings.
+    
 	Args:
 	    pos = log probabiltiy for positive examples
 	    neg = log probabiltiy for negaitve examples
@@ -24,7 +26,8 @@ def nll(pos, neg, **kwagrs):
 
 def nce(pos, neg, **kwagrs):
     """
-	The loss function can be used for any embeddings.
+	The Noise Contrastive Estimation loss function can be
+    used for any embeddings.
 	However, here we pass the unnormalised probabilities
 	through sigmoid to normalised the score. Word2vec uses
 	this loss function.

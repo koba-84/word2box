@@ -98,8 +98,8 @@ class Word2Box(BaseModule):
                     volume_temp=self.volume_temp,
                     intersection_temp=self.intersection_temp,
                 )
-            #  Word1 Word2  queen   royalty 5.93
-            # Word2 is more geenral P(royalty | queen) = 1
+            # Word1 Word2  queen   royalty 5.93
+            # Word2 is more general P(royalty | queen) = 1
             # Thus we need p(w2 | w1)
             score -= word1._log_soft_volume_adjusted(
                 word1.z,
@@ -125,7 +125,7 @@ class Word2BoxConjunction(Word2Box):
 
     def forward(self, idx_word, idx_context, mask_context, train=True):
         context_boxes = self.embedding_context(idx_context)  # Batch_size * 2 * dim
-        # Notce that the context is not masked yet. Need to mask them as well.
+        # Notice that the context is not masked yet. Need to mask them as well.
 
         word_boxes = self.embeddings_word(idx_word)  # Batch_size * ns+1 * 2 * dim
         pooled_context = self.intersect_multiple_box(context_boxes, mask_context)
