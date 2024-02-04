@@ -42,8 +42,8 @@ def get_token_ids(dataset, vocab):
 def load_vocab(data_dir: Union[str, Path]):
     vocab_tsv = Path(data_dir) / "vocab.tsv"
     vocab_stoi = {}
+    vocab_freq = {}
     if vocab_tsv.exists():
-        vocab_freq = {}
         with vocab_tsv.open() as vocab_file:
             next(vocab_file)  # skips header line
             for token_id, line in enumerate(vocab_file):
@@ -71,6 +71,8 @@ def load_vocab(data_dir: Union[str, Path]):
         json.dump(TEXT.vocab.freqs, vocab_freq_file)
         vocab_stoi_file.close()
         vocab_freq_file.close()
+        vocab_stoi = TEXT.vocab.stoi
+        vocab_freq = TEXT.vocab.freqs
     return vocab_stoi, vocab_freq
 
 

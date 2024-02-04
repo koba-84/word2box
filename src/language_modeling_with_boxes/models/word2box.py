@@ -51,7 +51,7 @@ class Word2Box(BaseModule):
             self.vocab_size, self.embedding_dim, box_type=box_type
         )
 
-    def forward(self, idx_word, idx_context, train=True):
+    def forward(self, idx_word, idx_context, context_mask, train=True):
         context_boxes = self.embedding_context(idx_context)  # Batch_size * 2 * dim
         word_boxes = self.embeddings_word(idx_word)  # Batch_size * ns+1 * 2 * dim
         if train == True:

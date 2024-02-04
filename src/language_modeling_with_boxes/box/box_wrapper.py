@@ -146,7 +146,7 @@ class BoxTensor(object):
     ) -> Tuple[Tensor, Tensor]:
         t1 = self
         t2 = other
-
+        z, Z = None, None
         if bayesian:
             try:
                 z = gumbel_beta * torch.logaddexp(
@@ -159,7 +159,7 @@ class BoxTensor(object):
                 Z = torch.min(Z, torch.min(t1.Z, t2.Z))
             except Exception as e:
                 print("Gumbel intersection is not possible")
-                breakpoint()
+                # breakpoint()
         else:
             z = torch.max(t1.z, t2.z)
             Z = torch.min(t1.Z, t2.Z)
