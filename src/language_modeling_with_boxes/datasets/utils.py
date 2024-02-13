@@ -65,8 +65,8 @@ def load_vocab(data_dir: Union[str, Path]):
             text_field=TEXT,
         )
         TEXT.build_vocab(train_split[0])
-        vocab_stoi_file = open(data_dir + "vocab_stoi.json", "w")
-        vocab_freq_file = open(data_dir + "vocab_freq.json", "w")
+        vocab_stoi_file = open(data_dir + "/vocab_stoi.json", "a")
+        vocab_freq_file = open(data_dir + "/vocab_freq.json", "a")
         json.dump(TEXT.vocab.stoi, vocab_stoi_file)
         json.dump(TEXT.vocab.freqs, vocab_freq_file)
         vocab_stoi_file.close()
