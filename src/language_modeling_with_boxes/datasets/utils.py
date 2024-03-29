@@ -2,16 +2,13 @@ import json
 import os
 from os import path
 import pickle
-import multiprocessing as mp
 from multiprocessing import Manager
 import torch
 import itertools
 
 import torchtext
-from torchtext.datasets import PennTreebank, WikiText2, WikiText103
-from torch.utils.data import ConcatDataset, DataLoader
 
-from ..datasets.word2vecgpu import LazyDatasetLoader, Word2VecDatasetOnDevice
+from ..datasets.word2vecgpu import LazyDatasetLoader
 
 from pathlib import Path
 from typing import *
@@ -162,5 +159,4 @@ def get_iter_on_device(
         batch_size=batch_size,
     )
 
-    val_iter, test_iter = None, None
-    return TEXT, train_iter, val_iter, test_iter, None
+    return TEXT, train_iter

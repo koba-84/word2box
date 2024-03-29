@@ -19,7 +19,7 @@ def training(config):
     torch.manual_seed(config["seed"])
     random.seed(config["seed"])
 
-    TEXT, train_iter, val_iter, test_iter, subsampling_prob = get_iter_on_device(
+    TEXT, train_iter = get_iter_on_device(
         config["batch_size"],
         config["dataset"],
         config["model_type"],
@@ -94,7 +94,7 @@ def training(config):
     
     trainer = TrainerWordSimilarity(
         train_iter=train_iter,
-        val_iter=val_iter,
+        val_iter=None,
         vocab=TEXT,
         lr=config["lr"],
         n_gram=config["n_gram"],
