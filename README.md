@@ -8,7 +8,7 @@ conda activate word2box
 conda install pytorch==1.7.1 -c pytorch
 ```
 ```
-git clone {repo-url} --recurse-submodules
+git clone https://github.com/koba-84/word2box --recurse-submodules
 cd word2box
 pip install -e lib/*
 pip install -e .
